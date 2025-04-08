@@ -1,9 +1,10 @@
 <?php
+    include_once './config.php';
     class DB {
-        private $host = 'localhost';
-        private $db_name = 'pmslink';
-        private $username = 'root';
-        private $password = '72452';
+        private $host = DB_HOST;
+        private $db_name = DB_NAME;
+        private $username = DB_USER;
+        private $password = DB_PASS;
         public $conn;
 
         public function __construct() {
