@@ -1,10 +1,14 @@
 <?php
     class DB {
         private $host = 'localhost';
-        private $db_name = 'tls_notes';
+        private $db_name = 'pmslink';
         private $username = 'root';
         private $password = '72452';
         public $conn;
+
+        public function __construct() {
+            $this->getConnection(); // Auto-connect
+        }    
 
         public function getConnection() {
             $this->conn = null;
