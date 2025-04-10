@@ -8,6 +8,10 @@ import Link from "next/link"
 
 export function LoginForm({
   className,
+  loginData,
+  handleChange,
+  handleSubmit,
+  error,
   ...props
 }) {
   return (
@@ -29,16 +33,17 @@ export function LoginForm({
               </Link>
             </div>
           </div>
-          <div className="flex flex-col gap-6">
-            <div className="grid gap-3">
+          <div className="flex flex-col gap-4 ">
+            <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
-              <Input id="email" type="email" placeholder="abc@example.com" required />
+              <Input id="email" type="email" name="email" placeholder="abc@example.com" className={error?"border-red-500":""} onChange={handleChange} value={loginData.email} required />
+              {error && <p className="text-red-500">{error}</p>}
             </div>
-            <div className="grid gap-3">
+            <div className="grid gap-2">
               <Label htmlFor="password">Password</Label>
-              <Input id="password" type="password" placeholder="password" required />
+              <Input id="password" type="password" name="password" placeholder="password" onChange={handleChange} value={loginData.password} required />
             </div>
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full cursor-pointer" onClick={handleSubmit}>
               Login
             </Button>
           </div>

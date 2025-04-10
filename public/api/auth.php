@@ -29,7 +29,7 @@
     $objcon = new DB;
     $jwt = new JWT("PMS_Link_MADE_BY_TEC-h-L-ink..Solving");
 
-    $arrResponse = array("status" => "false", "message" => "Something went wrong");
+    $arrResponse = array("status" => false, "message" => "Something went wrong");
 
     switch (strtoupper($requestData["action"])) {
         case "LOGIN":
@@ -40,12 +40,12 @@
             if ($objResult) {
                 if (password_verify($password, $objResult["password"])) {
                     $token = $jwt->generate(array("user_id" => $objResult["recid"],"name"=> $objResult["name"],"email" => $objResult["email"]));
-                    $arrResponse = array("status" => "true", "message" => "Login successful", "token" => $token);
+                    $arrResponse = array("status" => true, "message" => "Login successful", "token" => $token);
                 } else {
-                    $arrResponse = array("status" => "false", "message" => "Invalid password");
+                    $arrResponse = array("status" => false, "message" => "Invalid password");
                 }
             } else {
-                $arrResponse = array("status" => "false", "message" => "User not found");
+                $arrResponse = array("status" => false, "message" => "User not found");
             }
             break;
 
@@ -58,8 +58,8 @@
             $query = "SELECT * FROM users WHERE email = '".$email."'";
             $objResult = $objcon->fetchOne($query);
 
-            if ($objResult  ) {
-                $arrResponse = array("status" => "false", "message" => "Email already exists");
+            if ($objResult ) {
+                $arrResponse = array("status" => false, "message" => "Email already exists");
             }else{
                 //insert new user
                 $query = "INSERT INTO users (email, password, name) VALUES (:email, :password, :name)";
@@ -69,15 +69,15 @@
                     ':name' => $name
                 );
                 if ($objcon->executeQuery($query, $params)) {
-                    $arrResponse = array("status" => "true", "message" => "User registered successfully");
+                    $arrResponse = array("status" => true, "message" => "User registered successfully");
                 } else {
-                    $arrResponse = array("status" => "false", "message" => "Failed to register user");
+                    $arrResponse = array("status" => false, "message" => "Failed to register user");
                 }
             }
             break;
 
         default:
-            $arrResponse = array("status" => "false", "message" => "Invalid action");
+            $arrResponse = array("status" => false, "message" => "Invalid action");
             break;
     }
 
