@@ -1,21 +1,13 @@
-import React, { lazy, Suspense } from 'react';
+import DynamicLoader from "./DynamicLoader";
+
+export default async function Page() {
+  return <DynamicLoader/>;
+}
 
 export async function generateStaticParams() {
   return [
     { pageslug: "Dashboard" },
-    { pageslug: "projects" }
+    { pageslug: "projects" },
+    // Add more known slugs
   ];
 }
-
-const DynamicPage = ({ params }) => {
-  // Default to a 404 page if the slug is not found in the map
-  const Component = lazy(() => import(`@/module/${params?.pageslug}/index.js`)) || (() => <div>Page Not Found</div>);
-
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <Component />
-    </Suspense>
-  );
-};
-
-export default DynamicPage;

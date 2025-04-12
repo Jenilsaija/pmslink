@@ -27,15 +27,15 @@ export default function LoginPage() {
     validateData();
     if (error === null) {
       const arrReqParams = {
-        action: "login",
+        action: "LOGIN",
         email: loginData.email,
         password: loginData.password,
       };
-      const res = await makeRequest("/api/auth.php",arrReqParams);
+      const res = await makeRequest("/api/auth.php",arrReqParams,true);
       if (res.status===200 && res.data && res.data.status) {
         if (res.data.status) {
           toast.success(res.data.message);
-          setCookie("userToken",btoa(res.data.token),1);
+          setCookie("userToken",res.data.token,2);
           router.push("/");
         }else{
           toast.error(res.data.message);

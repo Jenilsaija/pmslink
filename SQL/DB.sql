@@ -11,3 +11,5 @@ INSERT INTO pages (slug, title, content) VALUES
 ('dashboard', 'Dashboard', 'This is the dashboard page.'),
 ('settings', 'Settings', 'This is the settings page.'),
 ('profile', 'Profile', 'This is the profile page.');
+INSERT INTO pages (slug, title, content) VALUES
+('projects', 'Projects', 'This is the Project page.');
