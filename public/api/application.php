@@ -25,7 +25,6 @@
         echo json_encode(["error" => "Invalid JSON"]);
         exit();
     }
-    
 
     $objcon = new DB;
 

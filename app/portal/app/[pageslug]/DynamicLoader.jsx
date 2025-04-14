@@ -1,6 +1,6 @@
 "use client";
 
-import AppSideBar from "@/components/AppSideBar";
+import Layout from "@/components/Layout";
 import { getCookie } from "@/lib/cookies.lib";
 import dynamic from "next/dynamic";
 import { useParams, useRouter } from "next/navigation";
@@ -15,15 +15,13 @@ export default function DynamicLoader() {
     router.push("/login");
   }
 
-  const Component = dynamic(() => import(`@/module/${params?.pageslug}/index.js`), { ssr: false }) || (() => <div>Page Not Found</div>);
+  const Component = dynamic(() => import(`@/module/${params?.pageslug}/index.js`), { ssr: false });
 
   return (
     <>
-      <AppSideBar>
         <Suspense fallback={<div>Loading...</div>}>
-          <Component />
+          <Layout Component={<Component />}/>
         </Suspense>
-      </AppSideBar>
     </>
   );
 }

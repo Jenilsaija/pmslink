@@ -1,14 +1,39 @@
-import React, { useState } from 'react'
+import dynamic from "next/dynamic";
+import { useSearchParams } from "next/navigation";
 
-const Index = () => {
-    const [title,setTitle] = useState("Projects");
+export default function Index(){
+  const searchParams = useSearchParams();
+  const ref = searchParams?.get('ref');
+  let refData = {};
+  
+  if (ref !== undefined && ref !== null) {
+    refData = JSON.parse(atob(ref));
+  }
+
+
+  const props ={
+    demo:"1111111111"
+  }
+
+  let filename = "";
+
+  switch (refData?.doAction) {
+    case "ADD":
+      
+      break;
+  
+    default:
+      filename = "List";
+      break;
+  }
+
+  const Component =dynamic(() => import(`./${filename}.js`), {
+    ssr: false,
+  });
+
   return (
-    <div>
-        <h1>{title}</h1>
-        <p>This is the projects page.</p>
-        <p>Here you can manage your projects.</p>
-    </div>
+    <>
+      <Component {...props}/>
+    </>
   )
 }
-
-export default Index;

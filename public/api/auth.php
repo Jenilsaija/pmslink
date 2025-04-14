@@ -8,6 +8,7 @@
  */
     include_once './db.class.php';
     require_once './jwt.class.php';
+    include_once './config.php';
     header("Access-Control-Allow-Origin: *");
     header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
     header("Content-Type: application/json");
@@ -27,7 +28,7 @@
         exit();
     }
     $objcon = new DB;
-    $jwt = new JWT("PMS_Link_MADE_BY_TEC-h-L-ink..Solving");
+    $jwt = new JWT(COMPANYSECRATE);
 
     $arrResponse = array("status" => false, "message" => "Something went wrong");
 

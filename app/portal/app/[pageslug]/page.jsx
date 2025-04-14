@@ -1,3 +1,4 @@
+import axios from "axios";
 import DynamicLoader from "./DynamicLoader";
 
 export default async function Page() {
@@ -5,9 +6,11 @@ export default async function Page() {
 }
 
 export async function generateStaticParams() {
-  return [
-    { pageslug: "Dashboard" },
-    { pageslug: "projects" },
-    // Add more known slugs
-  ];
+  // Fetch the list of known slugs from your API or database
+  const arrSlugs = await axios.get("http://localhost/api/pages.php");
+  const arrSlugsData = await arrSlugs.data;
+
+  return arrSlugsData.map((page) => {
+    return { pageslug: page.slug };
+  });
 }
