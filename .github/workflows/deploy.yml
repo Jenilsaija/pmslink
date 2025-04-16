@@ -36,7 +36,7 @@ jobs:
 
       - name: Build Next.js Static Site
         env: 
-        API_BASE_URL: https://pmslink.techlinksolving.com/api/
+          PMSAPIURL: https://pmslink.techlinksolving.com/api/
         run: npm run build
 
       - name: Upload via FTP to Hostinger
