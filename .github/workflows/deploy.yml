@@ -18,6 +18,19 @@ jobs:
         with:
           node-version: 18
 
+      - name: Generate config.php from GitHub Secrets
+        run: |
+          cat <<EOF > ./public/api/config.php
+          <?php
+              define("DB_HOST","${{ secrets.DB_HOST }}");
+              define("DB_USER","${{ secrets.DB_USER }}");
+              define("DB_NAME","${{ secrets.DB_NAME }}");
+              define("DB_PASS","${{ secrets.DB_PASS }}");
+              define("COMPANYSECRATE","${{ secrets.COMPANYSECRATE }}");
+          ?>
+          EOF
+        shell: bash
+
       - name: Install Dependencies
         run: npm install
 

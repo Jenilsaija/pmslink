@@ -22,7 +22,7 @@ const index = () => {
       </div>
       
       <div className='w-[70%] bg-base-100 rounded-md'>
-
+      CICD UPDATE
       </div>
     </div>
   )
