@@ -7,7 +7,7 @@ export default async function Page() {
 
 export async function generateStaticParams() {
   // Fetch the list of known slugs from your API or database
-  const arrSlugs = await axios.get("http://localhost/api/pages.php");
+  const arrSlugs = await axios.get(process.env.PMSAPIURL+"pages.php");
   const arrSlugsData = await arrSlugs.data;
 
   return arrSlugsData.map((page) => {

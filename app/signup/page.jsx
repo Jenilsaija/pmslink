@@ -59,7 +59,7 @@ export default function LoginPage() {
         "email": singUpFormData.email,
         "password": singUpFormData.password
       }
-      const objResponse = await makeRequest("/api/auth.php",arrPrams);
+      const objResponse = await makeRequest(process.env.PMSAPIURL+"auth.php",arrPrams);
       
       if (objResponse.status === 200 && objResponse.data.status) {
         if (objResponse.data.status) {

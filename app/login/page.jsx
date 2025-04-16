@@ -31,7 +31,7 @@ export default function LoginPage() {
         email: loginData.email,
         password: loginData.password,
       };
-      const res = await makeRequest("/api/auth.php",arrReqParams,true);
+      const res = await makeRequest(process.env.PMSAPIURL+"auth.php",arrReqParams,true);
       if (res.status===200 && res.data && res.data.status) {
         if (res.data.status) {
           toast.success(res.data.message);
