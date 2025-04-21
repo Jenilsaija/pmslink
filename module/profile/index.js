@@ -29,8 +29,8 @@ const index = () => {
   }
 
   return (
-    <div className='container flex flex-row h-screen p-14 gap-10 '>
-      <div className='w-[30%] h-full border-blue-900 border-2 rounded-md'>
+    <div className='container flex flex-row h-screen p-14 gap-10'>
+      <div className='w-[30%] h-full border-2 rounded-md'>
         <div className='p-5'>
           {profiletab.map((item, index) => {
             return (<div className={`flex items-center gap-2 p-3 my-1 rounded-2xl justify-start ${item?.id===activeTab ? "bg-blue-600 text-white" : "hover:bg-blue-600 hover:text-white cursor-pointer"}`} key={index} onClick={() => setAcitiveTab(item?.id)}>

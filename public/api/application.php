@@ -7,9 +7,11 @@
  * @version    1.0
  */
     include_once './db.class.php';
+    include_once './jwt.class.php';
     header("Access-Control-Allow-Origin: *");
     header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
     header("Content-Type: application/json");
+    $headers = apache_request_headers();
 
     $method = $_SERVER["REQUEST_METHOD"];
     if ($method != "POST") {
@@ -27,10 +29,47 @@
     }
 
     $objcon = new DB;
+    $jwt = new JWT(COMPANYSECRATE);
 
-    $requestData = $_SERVER ?? null;
+    //validate Token
+    $authToken = !empty($headers["Authorization"]) ? $headers["Authorization"] : "";
+    if (empty($authToken) || !isset($authToken)) {
+        print json_encode(array("status"=>false,"message"=>"unAuthorized"));
+        exit();
+    }else{
+        //verify token.
+        $userData = $jwt->verify($authToken);
+        if (!$userData) {
+            print json_encode(array("status"=>false,"message"=>"Invalid Token"));
+            exit();
+        }else{
+            define("ASUSERID",$userData["user_id"]);
+        }
+    }
 
-    var_dump($requestData);die;
+    $arrResponse = array(
+        "status" => false,
+        "message" =>"Something went wrong"
+    );
 
-    print json_encode("Hello World!");
+
+   switch ($requestData["action"]) {
+    case 'USER.UPDATE':
+        include_once './users/updateUser.php';
+        break;
+
+    case "USER.READ":
+        $arrResponse =array (
+            "status"=>true,
+            "data" => $userData
+        );
+        break;
+    
+    default:
+        $arrResponse["message"]="Invalid Action";
+        break;
+   }
+
+    print json_encode($arrResponse);
+    exit();
 ?>
