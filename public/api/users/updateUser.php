@@ -4,6 +4,8 @@
         "status" => false,
         "message" =>"Something went wrong"
     );
+    $objcon = new DB;
+
     $updateParams = $requestData["update"];
 
     if (isset($updateParams["email"])) {
@@ -42,7 +44,7 @@
                 $strset .= " name='".$value."',";
                 break;
             case "email":
-                $strset .= " email='".$value."',";
+                $strset .= " email='".$value."'";
                 break;
             case "password":
                 $pwvalue = password_hash($value, PASSWORD_BCRYPT);
@@ -52,9 +54,9 @@
     }
 
     $strQuery = $insertinto. $strset . " WHERE recid=". ASUSERID;
-    $objuprslt = $objcon->executeQuery($strQuery);
+    $objuprslt = $objcon->fetchAll($strQuery);
 
-    if ($objuprslt->affected_rows() > 0) {
+    if ($objuprslt > 0) {
         $arrResponse=array(
             "status"=>true,
             "message"=>"User Updated Successfully"

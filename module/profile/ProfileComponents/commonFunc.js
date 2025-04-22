@@ -9,7 +9,7 @@ export async function getUserData() {
 export async function UpdateUserData(userdata) {
     const arrReqParams = {
         "action":"USER.UPDATE",
-        "create":{
+        "update":{
             "name":userdata?.name,
             "email":userdata?.email
         }
@@ -44,9 +44,9 @@ export async function handleChangePassword(params){
 
     const arrReqParams = {
         "action":"USER.UPDATE",
-        "create":{
-            "oldpassword":userdata?.oldpassword,
-            "newpassword":password?.newpassword
+        "update":{
+            "oldpassword":passdata?.oldpassword,
+            "newpassword":passdata?.newpassword
         }
     }
     const objresult = await makeRequest("/api/application.php",arrReqParams);
