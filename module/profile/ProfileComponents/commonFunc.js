@@ -1,4 +1,5 @@
 import { makeRequest } from "@/lib/http.lib";
+import { toast } from "sonner";
 
 export async function getUserData() {
     const userdata = await makeRequest("/api/application.php",{action:"USER.READ"});
@@ -16,7 +17,9 @@ export async function UpdateUserData(userdata) {
     }
     const objresult = await makeRequest("/api/application.php",arrReqParams);
     if (objresult.data.status) {
-        alert("User updated successfully");
+       toast.success(objresult.data.message);
+    }else{
+        toast.error(objresult.data.message)
     }
 }
 
@@ -51,6 +54,8 @@ export async function handleChangePassword(params){
     }
     const objresult = await makeRequest("/api/application.php",arrReqParams);
     if (objresult.data.status) {
-        alert("User updated successfully");
-    }
+        toast.success(objresult.data.message);
+     }else{
+         toast.error(objresult.data.message)
+     }
 }

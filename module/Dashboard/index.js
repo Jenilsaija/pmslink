@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Index() {
+function index() {
   return (
     <div>
       CICD UPDATE
@@ -8,4 +8,4 @@ function Index() {
   )
 }
 
-export default Index
+export default index
