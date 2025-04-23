@@ -33,13 +33,13 @@ const SideBar = () => {
     return (
         <>
             <div className='flex flex-col items-center justify-between w-[4%] h-screen bg-blue-700 text-white'>
-                <div className='my-2'><Image src="/logo.png" alt="logo" width={"50"} height={"50"} /></div>
+                <div className='my-2'><img src="/logo.png" alt="logo" width={"50"} height={"50"} /></div>
                 <div>
                     {
                         arrSideBarItems.map((item) => {
                             return (
                                 <div key={item?.slug}>
-                                    <button className='cursor-pointer p-2 rounded-md hover:bg-blue-900 ' title={item?.title} onClick={() => { router.replace(`/portal/app/${item?.slug}`) }}>
+                                    <button className='cursor-pointer p-2 rounded-md hover:bg-blue-900 ' title={item?.title} onClick={() => { router.push(`/portal/app/${item?.slug}`) }}>
                                         {item?.icon}
                                     </button>
                                 </div>

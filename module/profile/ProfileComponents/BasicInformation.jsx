@@ -11,7 +11,7 @@ const BasicInformation = () => {
         role: 'Project Manager',
     })
     
-    const {data:user,error:err} = useSWR(["getUSerdata"],()=>getUserData(),{keepPreviousData:true});
+    const {data:user,error:err} = useSWR(["getUSerdata"],()=>getUserData(),{keepPreviousData:false});
 
     useEffect(()=>{
         if (user!==undefined) {
