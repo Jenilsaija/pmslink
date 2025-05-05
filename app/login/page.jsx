@@ -36,7 +36,7 @@ export default function LoginPage() {
         if (res.data.status) {
           toast.success(res.data.message);
           setCookie("userToken",res.data.token,2);
-          router.push("/portal/app/");
+          router.push("/portal/app/dashboard");
         }else{
           toast.error(res.data.message);
         }

@@ -3,10 +3,10 @@ import SideBar from './SideBar'
 
 function Layout({ Component }) {
     return (
-        <div className='flex flex-row w-full h-screen'>
+        <div className='flex flex-row min-h-screen'>
             <SideBar />
 
-            <div className='flex flex-col w-[96%]'>
+            <div className='flex-1 ml-16'>
                 {Component}
             </div>
         </div>

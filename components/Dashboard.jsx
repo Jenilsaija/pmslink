@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Header from '@/components/Header';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -17,7 +16,7 @@ const Dashboard = ({ user, stats, taskCompletionData, activities }) => {
       <div className="mt-6">
         <h2 className="font-semibold mb-4 text-gray-800">PROJECTS OVERVIEW</h2>
         
-        <div className="grid grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           <Card>
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
@@ -25,7 +24,7 @@ const Dashboard = ({ user, stats, taskCompletionData, activities }) => {
                   <p className="text-3xl font-bold">{stats.totalProjects}</p>
                   <p className="text-sm text-gray-500">Total projects</p>
                 </div>
-                <div className="w-10 h-10 bg-blue-100 rounded-md flex items-center justify-center text-app-blue">
+                <div className="w-10 h-10 bg-blue-100 rounded-md flex items-center justify-center text-blue-600">
                   <Grid2x2 />
                 </div>
               </div>
@@ -39,7 +38,7 @@ const Dashboard = ({ user, stats, taskCompletionData, activities }) => {
                   <p className="text-3xl font-bold">{stats.completedProjects}</p>
                   <p className="text-sm text-gray-500">Completed</p>
                 </div>
-                <div className="w-10 h-10 bg-green-100 rounded-md flex items-center justify-center text-app-green">
+                <div className="w-10 h-10 bg-green-100 rounded-md flex items-center justify-center text-green-600">
                   <CheckCircle />
                 </div>
               </div>
@@ -53,7 +52,7 @@ const Dashboard = ({ user, stats, taskCompletionData, activities }) => {
                   <p className="text-3xl font-bold">{stats.inProgressProjects}</p>
                   <p className="text-sm text-gray-500">In progress</p>
                 </div>
-                <div className="w-10 h-10 bg-yellow-100 rounded-md flex items-center justify-center text-app-yellow">
+                <div className="w-10 h-10 bg-yellow-100 rounded-md flex items-center justify-center text-yellow-600">
                   <Clock />
                 </div>
               </div>
@@ -67,7 +66,7 @@ const Dashboard = ({ user, stats, taskCompletionData, activities }) => {
                   <p className="text-3xl font-bold">{stats.delayedProjects}</p>
                   <p className="text-sm text-gray-500">Out of schedule</p>
                 </div>
-                <div className="w-10 h-10 bg-red-100 rounded-md flex items-center justify-center text-app-red">
+                <div className="w-10 h-10 bg-red-100 rounded-md flex items-center justify-center text-red-600">
                   <AlertCircle />
                 </div>
               </div>
@@ -75,8 +74,8 @@ const Dashboard = ({ user, stats, taskCompletionData, activities }) => {
           </Card>
         </div>
         
-        <div className="grid grid-cols-3 gap-6">
-          <div className="col-span-2">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2">
             <Card>
               <CardHeader>
                 <CardTitle className="text-base font-medium">TASKS COMPLETION</CardTitle>
@@ -109,7 +108,7 @@ const Dashboard = ({ user, stats, taskCompletionData, activities }) => {
               <CardHeader>
                 <div className="flex justify-between items-center">
                   <CardTitle className="text-base font-medium">ACTIVITY FEED</CardTitle>
-                  <div className="bg-blue-100 text-app-blue text-xs px-3 py-1 rounded-full">
+                  <div className="bg-blue-100 text-blue-600 text-xs px-3 py-1 rounded-full">
                     LIVE
                   </div>
                 </div>

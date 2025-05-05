@@ -2,26 +2,52 @@
 import React from 'react'
 import { AvatarFallback, AvatarImage } from './ui/avatar'
 import { Avatar } from '@radix-ui/react-avatar'
-import { BadgeCheck, Bell, ChevronsUpDown, CreditCard, Home, LayoutGrid, LogOut, Sparkles } from 'lucide-react'
+import { BadgeCheck, Bell, ChevronsUpDown, CreditCard, Home, LayoutGrid, LogOut, Sparkles, Users, FileText, MessageSquare, Clock, Settings } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu';
 import { removeCookie } from '@/lib/cookies.lib';
+import { 
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 
 const SideBar = () => {
     const router = useRouter();
 
-    const arrSideBarItems = [
+    const sidebarItems = [
         {
             title: "Dashboard",
             slug: "dashboard",
-            icon: <Home />
+            icon: <Home size={20} />
         },
         {
             title: "Projects",
             slug: "projects",
-            icon: <LayoutGrid />
+            icon: <LayoutGrid size={20} />
+        },
+        {
+            title: "Team",
+            slug: "team",
+            icon: <Users size={20} />
+        },
+        {
+            title: "Files",
+            slug: "files",
+            icon: <FileText size={20} />
+        },
+        {
+            title: "Messages",
+            slug: "messages",
+            icon: <MessageSquare size={20} />
+        },
+        {
+            title: "History",
+            slug: "history",
+            icon: <Clock size={20} />
         }
     ];
 
@@ -31,69 +57,63 @@ const SideBar = () => {
     }
 
     return (
-        <>
-            <div className='flex flex-col items-center justify-between w-[4%] h-screen bg-blue-700 text-white'>
-                <div className='my-2'><img src="/logo.png" alt="logo" width={"50"} height={"50"} /></div>
-                <div>
-                    {
-                        arrSideBarItems.map((item) => {
-                            return (
-                                <div key={item?.slug}>
-                                    <button className='cursor-pointer p-2 rounded-md hover:bg-blue-900 ' title={item?.title} onClick={() => { router.push(`/portal/app/${item?.slug}`) }}>
-                                        {item?.icon}
-                                    </button>
-                                </div>
-                            )
-                        })
-                    }
+        <TooltipProvider>
+            <div className="h-screen w-16 bg-blue-600 flex flex-col items-center py-6 fixed left-0 top-0">
+                <div className="mb-8">
+                    <div className="w-10 h-10 bg-white rounded flex items-center justify-center">
+                        <div className="w-6 h-6 bg-blue-600 rounded"></div>
+                    </div>
                 </div>
-                <div className='flex items-center justify-center my-2'>
-                    <DropdownMenu className="w-full">
-                        <DropdownMenuTrigger>
-                            <Avatar className="h-full w-full rounded-lg py-2">
-                                {/* <AvatarImage src={user.avatar} alt={user.name} /> */}
-                                <AvatarFallback className="rounded-lg p-2 bg-blue-900">CN</AvatarFallback>
-                            </Avatar>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent
-                            className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-                            side={"right"}
-                            align="end"
-                            sideOffset={4}
-                        >
-                            <DropdownMenuLabel className="p-0 font-normal">
-                                <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                                    <Avatar className="h-8 w-8 rounded-lg">
-                                        {/* <AvatarImage src={user.avatar} alt={user.name} /> */}
-                                        <AvatarFallback className="rounded-lg bg-blue-900 p-2 text-white">CN</AvatarFallback>
-                                    </Avatar>
-                                    <div className="grid flex-1 text-left text-sm leading-tight">
-                                        <span className="truncate font-semibold">{"adasd"}</span>
-                                        <span className="truncate text-xs">{"dsfsdf"}</span>
-                                    </div>
-                                </div>
-                            </DropdownMenuLabel>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuGroup>
-                                <DropdownMenuItem className={"cursor-pointer"} onClick={() => { router.replace("./profile") }}>
-                                    <BadgeCheck />
-                                    Account
-                                </DropdownMenuItem>
-                                <DropdownMenuItem className={"cursor-pointer"}>
-                                    <Bell />
-                                    Notifications
-                                </DropdownMenuItem>
-                            </DropdownMenuGroup>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem className={"cursor-pointer"} onClick={handleLogout}>
-                                <LogOut />
-                                Log out
-                            </DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+                
+                <div className="flex flex-col gap-6 items-center">
+                    {sidebarItems.map((item) => (
+                        <Tooltip key={item.slug}>
+                            <TooltipTrigger asChild>
+                                <button 
+                                    className="text-white p-2 rounded-md hover:bg-white/10"
+                                    onClick={() => router.push(`/portal/app/${item.slug}`)}
+                                >
+                                    {item.icon}
+                                </button>
+                            </TooltipTrigger>
+                            <TooltipContent side="right">
+                                <p>{item.title}</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    ))}
+                </div>
+                
+                <div className="mt-auto flex flex-col gap-6 items-center">
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <button 
+                                className="text-white p-2 rounded-md hover:bg-white/10"
+                                onClick={() => router.push('/portal/app/settings')}
+                            >
+                                <Settings size={20} />
+                            </button>
+                        </TooltipTrigger>
+                        <TooltipContent side="right">
+                            <p>Settings</p>
+                        </TooltipContent>
+                    </Tooltip>
+                    
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <button 
+                                className="text-white p-2 rounded-md hover:bg-white/10"
+                                onClick={handleLogout}
+                            >
+                                <LogOut size={20} />
+                            </button>
+                        </TooltipTrigger>
+                        <TooltipContent side="right">
+                            <p>Logout</p>
+                        </TooltipContent>
+                    </Tooltip>
                 </div>
             </div>
-        </>
+        </TooltipProvider>
     )
 }
 
