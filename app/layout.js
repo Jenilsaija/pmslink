@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
     const pageslug = path.split("/");
     
     if (pageslug[1] !== "portal" || pageslug[2] !== "app" || pageslug[3] === undefined || pageslug[3] === "") {
-      router.push("/portal/app/dashboard");
+      router.replace("/portal/app/dashboard");
     }
   },[])
 

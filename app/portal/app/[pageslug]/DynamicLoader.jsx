@@ -12,7 +12,7 @@ export default function DynamicLoader() {
   const token = getCookie("userToken");
 
   if (token == "" || token == null || token == undefined) {
-    router.push("/login");
+    router.replace("/login");
   }
 
   const Component = dynamic(() => import(`@/module/${params?.pageslug}/index.js`), { ssr: false });
