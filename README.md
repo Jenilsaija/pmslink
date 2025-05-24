@@ -57,6 +57,7 @@ To get started with the project, follow these steps:
 ## Contributing
 
 We welcome contributions from the community! Please read our [Contributing Guide](CONTRIBUTING.md) to get started.
+please consider this design : https://github.com/Jenilsaija/neat-site-sketch
 
 ## License
 
