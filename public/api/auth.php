@@ -36,8 +36,8 @@
         case "LOGIN":
             $email = $requestData["email"];
             $password = $requestData["password"];
-            $query = "SELECT * FROM users WHERE email = '".$email."'";
-            $objResult = $objcon->fetchOne($query);
+            $query = "SELECT * FROM users WHERE email = :email";
+            $objResult = $objcon->fetchOne($query, [':email' => $email]);
             if ($objResult) {
                 if (password_verify($password, $objResult["password"])) {
                     $token = $jwt->generate(array("user_id" => $objResult["recid"],"name"=> $objResult["name"],"email" => $objResult["email"]));
@@ -56,8 +56,8 @@
             $name = $requestData["name"];
 
             //check email already exists.
-            $query = "SELECT * FROM users WHERE email = '".$email."'";
-            $objResult = $objcon->fetchOne($query);
+            $query = "SELECT * FROM users WHERE email = :email";
+            $objResult = $objcon->fetchOne($query, [':email' => $email]);
 
             if ($objResult ) {
                 $arrResponse = array("status" => false, "message" => "Email already exists");
